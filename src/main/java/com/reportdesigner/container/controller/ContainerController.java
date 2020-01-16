@@ -31,6 +31,6 @@ public class ContainerController {
      @RequestMapping(value = "/report/{name}" ,method = RequestMethod.GET)
      public String report(@PathVariable("name") String reportName) throws IOException {
 
-          return "";
+          return "/report/datalist";
      }
 }
