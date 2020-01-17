@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.net.InetAddress;
 
 
 /**
@@ -33,10 +34,15 @@ public class ContainerController {
 
      @RequestMapping(value = "/receive" ,method = RequestMethod.POST)
      @ResponseBody
-     public JsonResult receive(@RequestBody DBDesignerReportModel dbDesignerReportModel) throws IOException {
+     public JsonResult receive(@RequestBody DBDesignerReportModel dbDesignerReportModel)   {
 
-           FileUtil.writeDataTo(dbDesignerReportModel.getDesignerReportModel().getTitle(),dbDesignerReportModel);
-          return new JsonResult(true);
+          try{
+               FileUtil.writeDataTo(dbDesignerReportModel.getDesignerReportModel().getTitle(),dbDesignerReportModel);
+               return new JsonResult(true);
+          }catch (Exception e){
+               return new JsonResult(false,e.getMessage());
+          }
+
      }
 
      @RequestMapping(value = "/report/{name}" ,method = RequestMethod.GET)
