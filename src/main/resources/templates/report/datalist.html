@@ -1,10 +1,37 @@
-<!DOCTYPE html>
+<#assign basePath=request.contextPath />
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>报表展示</title>
 
+    <style>
+        table,table tr th, table tr td { border:1px solid #0094ff; }
+    </style>
+</head>
+<body style="text-align: center">
+<div style="width: 100%;height: 100%">
+
+
+    <table style="width: 100%;height: 100%;border-style: outset;size: 2px">
+
+        <thead>
+        <tr>
+            <th colspan="${ data.headers?size}" ><h1>${data.title}</h1></th>
+        </tr>
+        <tr>
+            <#list data.headers as row>
+            <th>${row}</th>
+            </#list>
+        </tr>
+        </thead>
+        <#list data.datalist as row>
+        <tr>
+            <#list row as cols>
+            <td>${cols}</td>
+             </#list>
+        </tr>
+        </#list>
+    </table>
+</div>
 </body>
 </html>

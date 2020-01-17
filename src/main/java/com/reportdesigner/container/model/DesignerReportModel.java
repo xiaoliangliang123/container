@@ -3,10 +3,11 @@ package com.reportdesigner.container.model;
 
 import com.reportdesigner.container.util.JsonUtil;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DesignerReportModel {
+public class DesignerReportModel implements Serializable {
 
     private  String sql;
     private  String dbColumnJson;

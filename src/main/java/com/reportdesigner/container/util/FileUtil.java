@@ -10,16 +10,25 @@ import java.io.*;
 public class FileUtil {
 
 
-    public static void writeDataTo(String filename, String jsonString) throws IOException {
+    public static void writeDataTo(String filename, Object object) throws IOException {
 
         File file = new File("D://reportDesigner/"+filename);
         if(file.exists()){
             file.delete();
         }
         FileOutputStream fileOutStream = new FileOutputStream(file);
-        DataOutputStream dataOutputStream =  new DataOutputStream(fileOutStream);
-        dataOutputStream.writeBytes(jsonString);
-        dataOutputStream.flush();
-        dataOutputStream.close();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutStream);
+        objectOutputStream.writeObject(object);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+    }
+
+    public static Object readFileToData(String filename) throws IOException, ClassNotFoundException {
+
+        File file = new File("D://reportDesigner/"+filename);
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        Object object = objectInputStream.readObject();
+        return object;
     }
 }
